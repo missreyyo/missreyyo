@@ -2,13 +2,15 @@
 
 #
 
-<img src = "source/fotoğrafım.jpg" width="250" height="250">
+
+![fotoğrafım](https://user-images.githubusercontent.com/88316928/177210279-373ea9fe-8336-4f8c-a211-fe45a197ebae.jpg)
 
 ### -I am student at Mugla Sitki Kocman University Computer Engineering first year 👨‍🎓
 
 ### -I interested in Metaverse 🌎
 
-<img src = "source/MiE logo.png" width="250" height="250">
+
+![MiE logo](https://user-images.githubusercontent.com/88316928/177210254-9eac6827-8765-4d0b-81ce-902318b1fa00.png)
 
 ### -I have project with "Fairverse" name 💡
 
