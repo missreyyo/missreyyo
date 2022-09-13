@@ -3,7 +3,7 @@
 #
 
 
-### -I am student at Mugla Sitki Kocman University Computer Engineering first year 👨‍🎓
+### -I am student at Mugla Sitki Kocman University Computer Engineering second year 👨‍🎓
 
 ### -I interested in Metaverse 🌎
 
