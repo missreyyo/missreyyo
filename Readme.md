@@ -13,7 +13,7 @@ https://gitlab.com/missreyyo
 
 ![MiE logo](https://user-images.githubusercontent.com/88316928/177210254-9eac6827-8765-4d0b-81ce-902318b1fa00.png)
 
-### -I have project with "Fairverse" name 💡
+### -I have project with "Fairverse" name 💡https://github.com/Fairverse
 
 
 
