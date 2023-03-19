@@ -2,7 +2,7 @@
 
 #
 ### 
-You can see my other codes.
+# You can see my other codes.
 https://gitlab.com/missreyyo
 
 ### -I am a second year computer engineering student at Muğla Sıtkı Koçman University. I am interested in Metaverse. I am a member of MvRG (Metaverse Research Group) main. I have been a student in two projects  I am open to learning and innovations.
