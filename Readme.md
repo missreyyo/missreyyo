@@ -9,7 +9,7 @@ https://gitlab.com/missreyyo
 
 ### -I am student at Mugla Sitki Kocman University Computer Engineering second year 👨‍🎓
 
-### -I interested in Metaverse 🌎
+### -I am interested in Metaverse 🌎
 
 
 
