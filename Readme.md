@@ -1,13 +1,12 @@
-## Reyhan Duygu - Student Of Computer Engineering :blush: 
+## Reyhan Duygu - Blockhain Analyst Developer :blush: 
 
 #
 ### 
 # You can see my other codes.
 https://gitlab.com/missreyyo
 
-### -I am a fourth year computer engineering student at Muğla Sıtkı Koçman University. I am interested in Metaverse. I am a member of MvRG (Metaverse Research Group) main.  I am open to learning and innovations.
+### -I am a computer engineer and I graduated from Muğla Sıtkı Koçman University. I am open to learning and innovations.
 
-### -I am student at Mugla Sitki Kocman University Computer Engineering second year 👨‍🎓
 
 ### -I am interested in Metaverse 🌎
 
