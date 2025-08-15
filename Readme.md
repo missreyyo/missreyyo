@@ -5,8 +5,6 @@
 # You can see my other codes.
 https://gitlab.com/missreyyo
 ### -I am a computer engineer and I graduated from Muğla Sıtkı Koçman University. I am open to learning and innovations.
-### -I work at TUBU Arge (part time).
-### -I am participant of **Stellar Fullstack Bootcamp** ☺️
 
 
 ### -I am interested in Metaverse 🌎
