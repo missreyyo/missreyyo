@@ -1,19 +1,26 @@
-release:
-  date: "2025-08-19"
-  version: "v1.0.0"
-  
-  new_features:
-    - title: "New feature 1"
-      description: "Detailed description of the first new feature"
-    - title: "New feature 2"
-      description: "Detailed description of the second new feature"
-  
-  bug_fixes:
-    - title: "Bug fix 1"
-      description: "Description of the first fixed bug"
-    - title: "Bug fix 2"
-      description: "Description of the second fixed bug"
-  
-  notes:
-    - text: "General notes or additional information"
-    - text: "notes"
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+      - duplicate
+      - invalid
+  categories:
+    - title: "New Features "
+      labels:
+        - feature
+        - enhancement
+        - new-feature
+    - title: "Bug Fixes"
+      labels:
+        - bug
+        - bugfix
+        - fix
+    - title: "Notes"
+      labels:
+        - documentation
+        - notes
+        - improvement
+        - refactor
+    - title: "Other Changes"
+      labels:
+        - "*"
