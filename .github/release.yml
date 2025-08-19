@@ -16,9 +16,30 @@ jobs:
         id: changelog
         uses: release-drafter/release-drafter@v6
         with:
-          config-name: release-drafter.yml  # aynı repoda bulunacak
+          config-name: inline
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_DRAFTER_CONFIG: |
+            categories:
+              - title: New Features
+                labels:
+                  - Semver-Minor
+                  - enhancement
+              - title: Bug Fixes
+                labels:
+                  - bug
+              - title: Breaking Changes
+                labels:
+                  - Semver-Major
+                  - breaking-change
+              - title: Other Changes
+                labels:
+                  - "*"
+            exclude:
+              labels:
+                - ignore-for-release
+              authors:
+                - octocat
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -38,4 +59,3 @@ jobs:
             | **Notes** | ${{ steps.changelog.outputs.body }} |
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
