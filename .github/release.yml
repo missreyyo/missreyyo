@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate Changelog
+        id: changelog
+        uses: release-drafter/release-drafter@v6
+        with:
+          config-name: release-drafter.yml  # aynı repoda bulunacak
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          body: |
+            # Release ${{ github.ref_name }}
+
+            | Section | Description |
+            |---------|-------------|
+            | **Date** | ${{ github.event.head_commit.timestamp }} |
+            | **New Features** | ${{ steps.changelog.outputs.changes.New\ Features }} |
+            | **Bug Fixes** | ${{ steps.changelog.outputs.changes.Bug\ Fixes }} |
+            | **Breaking Changes** | ${{ steps.changelog.outputs.changes.Breaking\ Changes }} |
+            | **Other Changes** | ${{ steps.changelog.outputs.changes.Other\ Changes }} |
+            | **Notes** | ${{ steps.changelog.outputs.body }} |
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
