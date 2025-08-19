@@ -1,61 +1,19 @@
-name: Release
-
-on:
-  push:
-    tags:
-      - 'v*.*.*'
-
-jobs:
-  release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Generate Changelog
-        id: changelog
-        uses: release-drafter/release-drafter@v6
-        with:
-          config-name: inline
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RELEASE_DRAFTER_CONFIG: |
-            categories:
-              - title: New Features
-                labels:
-                  - Semver-Minor
-                  - enhancement
-              - title: Bug Fixes
-                labels:
-                  - bug
-              - title: Breaking Changes
-                labels:
-                  - Semver-Major
-                  - breaking-change
-              - title: Other Changes
-                labels:
-                  - "*"
-            exclude:
-              labels:
-                - ignore-for-release
-              authors:
-                - octocat
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ github.ref_name }}
-          name: Release ${{ github.ref_name }}
-          body: |
-            # Release ${{ github.ref_name }}
-
-            | Section | Description |
-            |---------|-------------|
-            | **Date** | ${{ github.event.head_commit.timestamp }} |
-            | **New Features** | ${{ steps.changelog.outputs.changes.New\ Features }} |
-            | **Bug Fixes** | ${{ steps.changelog.outputs.changes.Bug\ Fixes }} |
-            | **Breaking Changes** | ${{ steps.changelog.outputs.changes.Breaking\ Changes }} |
-            | **Other Changes** | ${{ steps.changelog.outputs.changes.Other\ Changes }} |
-            | **Notes** | ${{ steps.changelog.outputs.body }} |
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+release:
+  date: "2025-08-19"
+  version: "v1.0.0"
+  
+  new_features:
+    - title: "New feature 1"
+      description: "Detailed description of the first new feature"
+    - title: "New feature 2"
+      description: "Detailed description of the second new feature"
+  
+  bug_fixes:
+    - title: "Bug fix 1"
+      description: "Description of the first fixed bug"
+    - title: "Bug fix 2"
+      description: "Description of the second fixed bug"
+  
+  notes:
+    - text: "General notes or additional information"
+    - text: "notes"
