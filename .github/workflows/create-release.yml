@@ -33,23 +33,53 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: 3.11
-      - name: Generate RELEASE.md from PRs
+      - name: Generate RELEASE.md from Tag PRs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RELEASE_TAG: ${{ github.ref_name }}
+          REPO: ${{ github.repository }}
         run: |
-          import os, requests
+          import os, subprocess, json
           from datetime import date
 
           token = os.environ['GITHUB_TOKEN']
           tag = os.environ['RELEASE_TAG']
-          repo = os.environ['GITHUB_REPOSITORY']
+          repo = os.environ['REPO']
 
-          headers = {'Authorization': f'token {token}'}
-          # PR listesi
-          url = f"https://api.github.com/repos/{repo}/pulls?state=closed&per_page=100"
-          prs = requests.get(url, headers=headers).json()
+          # Önceki tag'ı al
+          try:
+              prev_tag = subprocess.check_output(
+                  ["git", "describe", "--tags", "--abbrev=0", f"{tag}^"],
+                  text=True
+              ).strip()
+          except subprocess.CalledProcessError:
+              prev_tag = None
 
+          # Tag aralığındaki commit hash'lerini al
+          if prev_tag:
+              commits = subprocess.check_output(
+                  ["git", "log", f"{prev_tag}..{tag}", "--pretty=format:%H"],
+                  text=True
+              ).splitlines()
+          else:
+              commits = subprocess.check_output(
+                  ["git", "log", tag, "--pretty=format:%H"],
+                  text=True
+              ).splitlines()
+
+          # Her commit için PR bul
+          pr_list = []
+          for c in commits:
+              result = subprocess.run(
+                  ["gh", "pr", "list", "--state", "merged", "--json", "number,title,labels,mergeCommit", "--limit", "100"],
+                  capture_output=True, text=True
+              )
+              prs = json.loads(result.stdout)
+              for pr in prs:
+                  if pr["mergeCommit"]["oid"] in commits:
+                      pr_list.append(pr)
+
+          # Kategoriler
           categories = {
               "New Features": ["feature", "enhancement", "new-feature"],
               "Bug Fixes": ["bug", "bugfix", "fix"],
@@ -57,21 +87,19 @@ jobs:
               "Other Changes": ["*"]
           }
 
+          # Markdown oluştur
           output = f"# Release {tag}\n\n| Section | Description |\n|---|---|\n"
           today = date.today().isoformat()
+          output += f"| **Date** | {today} |\n"
 
-          # Her kategori için PR’ları filtrele
           for title, labels in categories.items():
               section_prs = []
-              for pr in prs:
-                  pr_labels = [l['name'].lower() for l in pr.get('labels',[])]
+              for pr in pr_list:
+                  pr_labels = [l["name"].lower() for l in pr.get("labels", [])]
                   if any(l in pr_labels for l in labels) or "*" in labels:
-                      section_prs.append(f"- {pr['title']} (# {pr['number']})")
+                      section_prs.append(f"- {pr['title']} (#{pr['number']})")
               if section_prs:
                   output += f"| **{title}** | {'<br>'.join(section_prs)} |\n"
-
-          # Tarih satırını ekle
-          output = output.replace("| **New Features**", f"| **Date** | {today} |\n| **New Features**", 1)
 
           with open("RELEASE.md", "a") as f:
               f.write(output)
